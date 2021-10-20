@@ -16,6 +16,7 @@ class SetGui:
     TextInput:Entry
     tkPassword:StringVar ="none"
     Password:str ="none"
+    thepassword:tk.Label
     def lowercase(self):
         if( self.bEnableLowerCase ==False):
             self.bEnableLowerCase =True
@@ -38,6 +39,8 @@ class SetGui:
         PasswordGenrate =PasswordGenerator(self.bEnableLowerCase,self.bEnableCapitalCase,self.bEnableSpecialCharacter,int( self.TextInput.get()))
         self.Password = PasswordGenrate.GeneratePassword()
         self.tkPassword =self.Password
+        self.thepassword.config(text = self.Password) 
+
     def Mainloop(self):
         input  = tk.Label(self.Window,text ="Size of password").grid(row =0)
 
@@ -47,7 +50,7 @@ class SetGui:
 
         btn=Button(self.Window,text="generate", fg ="blue",command=self.Generatepassword)
         temp = tk.Label(self.Window,text ="Password = ")
-        thepassword =tk.Label(self.Window,text = self.tkPassword)
+        self.thepassword =tk.Label(self.Window,text = self.Password)
 
         LowerCaseLetter =Checkbutton(self.Window,text="Enable Lower case letters",variable=self.EnableLowerCase,command=self.lowercase)
         CaptialCaseLetter1 =Checkbutton(self.Window,text="Enable captial case letters",variable=self.EnableCapitalCase,command=self.CaptialCaseLetter)
@@ -58,7 +61,7 @@ class SetGui:
         SpecialCharacter.place(x=0,y=90)
         btn.place(x=80,y=120)
         temp.place(x=40,y=150)
-        thepassword.place(x=100,y=150)
+        self.thepassword.place(x=100,y=150)
 
         self.Window.title('password Generator')
         self.Window.geometry("300x200+10+20")
